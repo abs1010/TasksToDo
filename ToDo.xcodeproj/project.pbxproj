@@ -15,9 +15,12 @@
 		BCA21E3923B6C4730030AEFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCA21E3723B6C4730030AEFD /* LaunchScreen.storyboard */; };
 		BCA21E4823B82C690030AEFD /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BCA21E4623B82C690030AEFD /* DataModel.xcdatamodeld */; };
 		BCA21E6D23BA854A0030AEFD /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA21E6C23BA854A0030AEFD /* CategoryViewController.swift */; };
+		F6F2862F0914BA08E8E5280A /* Pods_ToDo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D0A2F4B0DD504B8F614F10A /* Pods_ToDo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D0A2F4B0DD504B8F614F10A /* Pods_ToDo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToDo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9988B533EBD1563E05329816 /* Pods-ToDo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDo.release.xcconfig"; path = "Target Support Files/Pods-ToDo/Pods-ToDo.release.xcconfig"; sourceTree = "<group>"; };
 		BCA21E2923B6C4700030AEFD /* ToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCA21E2C23B6C4700030AEFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BCA21E2E23B6C4700030AEFD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -28,6 +31,7 @@
 		BCA21E3A23B6C4730030AEFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BCA21E4723B82C690030AEFD /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		BCA21E6C23BA854A0030AEFD /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		E9F9C51648A01A763128901D /* Pods-ToDo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDo.debug.xcconfig"; path = "Target Support Files/Pods-ToDo/Pods-ToDo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,17 +39,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6F2862F0914BA08E8E5280A /* Pods_ToDo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		40E6B0915AE5AF48BAC1DA01 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2D0A2F4B0DD504B8F614F10A /* Pods_ToDo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BCA21E2023B6C4700030AEFD = {
 			isa = PBXGroup;
 			children = (
 				BCA21E2B23B6C4700030AEFD /* ToDo */,
 				BCA21E2A23B6C4700030AEFD /* Products */,
+				D4169FD168A3FC158513ECFF /* Pods */,
+				40E6B0915AE5AF48BAC1DA01 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,6 +120,16 @@
 			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
+		D4169FD168A3FC158513ECFF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E9F9C51648A01A763128901D /* Pods-ToDo.debug.xcconfig */,
+				9988B533EBD1563E05329816 /* Pods-ToDo.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -112,9 +137,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BCA21E3D23B6C4730030AEFD /* Build configuration list for PBXNativeTarget "ToDo" */;
 			buildPhases = (
+				2C08B46BBB6454F61B925E67 /* [CP] Check Pods Manifest.lock */,
 				BCA21E2523B6C4700030AEFD /* Sources */,
 				BCA21E2623B6C4700030AEFD /* Frameworks */,
 				BCA21E2723B6C4700030AEFD /* Resources */,
+				24AF496AA11A894555EDA2CC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -170,6 +197,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		24AF496AA11A894555EDA2CC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ToDo/Pods-ToDo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ToDo/Pods-ToDo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ToDo/Pods-ToDo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2C08B46BBB6454F61B925E67 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ToDo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BCA21E2523B6C4700030AEFD /* Sources */ = {
@@ -322,6 +391,7 @@
 		};
 		BCA21E3E23B6C4730030AEFD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E9F9C51648A01A763128901D /* Pods-ToDo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -340,6 +410,7 @@
 		};
 		BCA21E3F23B6C4730030AEFD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9988B533EBD1563E05329816 /* Pods-ToDo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
