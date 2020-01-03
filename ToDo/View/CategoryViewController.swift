@@ -7,20 +7,23 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 
 class CategoryViewController: UITableViewController {
     
-    var categoryArray : [Category] = []
+    var categoryArray : Results<Category>?
+    
     var colorsArray : [UIColor] = [.red, .systemPink, .orange, .black, .brown, .cyan, .green, .gray , .darkGray, .lightGray, .blue, .magenta, .purple]
     
     //Cria a instancia para o CoreData em context
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    // let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    let realm = try! Realm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.loadItems()
+        self.loadCategories()
         
     }
     
@@ -34,14 +37,13 @@ class CategoryViewController: UITableViewController {
             
             if categoryTextField.text != "" {
                 
-                let newCategory = Category(context: self.context)
-                newCategory.name = categoryTextField.text
-                
-                self.categoryArray.append(newCategory)
-                self.saveItems()
+                let newCategory = Category()
+                newCategory.name = categoryTextField.text!
             
+                self.save(category: newCategory)
+                
             }
-
+            
             self.tableView.reloadData()
         }
         
@@ -51,7 +53,7 @@ class CategoryViewController: UITableViewController {
         }
         
         let btnCancel = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
-                
+        
         alertController.addAction(btnCancel)
         alertController.addAction(btnAdd)
         
@@ -63,7 +65,7 @@ class CategoryViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.categoryArray.count
+        return self.categoryArray?.count ?? 1
         
     }
     
@@ -72,7 +74,7 @@ class CategoryViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath)
         
         cell.textLabel?.textColor = .white
-        cell.textLabel?.text = self.categoryArray[indexPath.row].name
+        cell.textLabel?.text = self.categoryArray?[indexPath.row].name ?? "Sem categorias adicionadas"
         cell.backgroundColor = self.colorsArray[indexPath.row]
         
         return cell
@@ -88,27 +90,25 @@ class CategoryViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        //if segue.identifier == "goToItems" {
-            
-            let destinationVC = segue.destination as! ToDoViewController
-            
-            if let indexPath = tableView.indexPathForSelectedRow {
-                destinationVC.selectedCategory = categoryArray[indexPath.row]
-                destinationVC.tempIndex = indexPath.row
-            }
+        let destinationVC = segue.destination as! ToDoViewController
         
-        //}
+        if let indexPath = tableView.indexPathForSelectedRow {
+            destinationVC.selectedCategory = categoryArray?[indexPath.row]
+        }
+
         
     }
     
     
     //MARK: - CRUD METHODS
     
-    func saveItems(){
+    func save(category: Category){
         
         do {
             
-            try context.save()
+            try realm.write {
+                realm.add(category)
+            }
             
         }catch{
             
@@ -121,16 +121,9 @@ class CategoryViewController: UITableViewController {
     }
     
     
-    func loadItems(with request: NSFetchRequest<Category> = Category.fetchRequest()) {
+    func loadCategories() {
         
-        do {
-            categoryArray = try context.fetch(request)
-            
-        }catch{
-            
-            print("Error fetching data from context \(error)")
-            
-        }
+        categoryArray = realm.objects(Category.self)
         
         tableView.reloadData()
     }

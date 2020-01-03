@@ -1,0 +1,21 @@
+//
+//  Data.swift
+//  ToDo
+//
+//  Created by Alan Silva on 31/12/19.
+//  Copyright © 2019 Alan Silva. All rights reserved.
+//
+
+import Foundation
+import RealmSwift
+
+class Item: Object {
+    
+   @objc dynamic var title: String = ""
+   @objc dynamic var done: Bool = false
+   @objc dynamic var dateCreated: Date?
+    
+    
+    //criando relacao inversa
+    var parentCategory = LinkingObjects(fromType: Category.self, property: "items")
+}
