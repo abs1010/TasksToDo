@@ -8,15 +8,11 @@
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
-class CategoryViewController: UITableViewController {
+class CategoryViewController: SwipeTableViewController {
     
     var categoryArray : Results<Category>?
-    
-    var colorsArray : [UIColor] = [.red, .systemPink, .orange, .black, .brown, .cyan, .green, .gray , .darkGray, .lightGray, .blue, .magenta, .purple]
-    
-    //Cria a instancia para o CoreData em context
-    // let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     let realm = try! Realm()
     
@@ -24,7 +20,7 @@ class CategoryViewController: UITableViewController {
         super.viewDidLoad()
         
         self.loadCategories()
-        
+    
     }
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
@@ -39,7 +35,7 @@ class CategoryViewController: UITableViewController {
                 
                 let newCategory = Category()
                 newCategory.name = categoryTextField.text!
-            
+                
                 self.save(category: newCategory)
                 
             }
@@ -71,16 +67,16 @@ class CategoryViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath)
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         cell.textLabel?.textColor = .white
         cell.textLabel?.text = self.categoryArray?[indexPath.row].name ?? "Sem categorias adicionadas"
-        cell.backgroundColor = self.colorsArray[indexPath.row]
+        
+        cell.backgroundColor = UIColor.randomFlat()
         
         return cell
         
     }
-    
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -95,10 +91,8 @@ class CategoryViewController: UITableViewController {
         if let indexPath = tableView.indexPathForSelectedRow {
             destinationVC.selectedCategory = categoryArray?[indexPath.row]
         }
-
         
     }
-    
     
     //MARK: - CRUD METHODS
     
@@ -120,6 +114,7 @@ class CategoryViewController: UITableViewController {
         
     }
     
+    //MARK: - Load Data
     
     func loadCategories() {
         
@@ -128,4 +123,28 @@ class CategoryViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    //MARK: - Delete Data from Swipe
+    
+    override func updateModel(at indexPath: IndexPath) {
+        
+        super.updateModel(at: indexPath)
+        
+        if let categoryForDeletion = self.categoryArray?[indexPath.row] {
+            
+            do{
+                try self.realm.write {
+                    self.realm.delete(categoryForDeletion)
+                }
+            }catch{
+                print("Erro ao remover registro \(error)")
+            }
+            
+            //tableView.reloadData()
+        }
+        
+    }
+    
+    
 }
+
+

@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class ToDoViewController: UITableViewController {
+class ToDoViewController: SwipeTableViewController {
     
     var todoItems : Results<Item>?
     
@@ -26,7 +26,7 @@ class ToDoViewController: UITableViewController {
         // Do any additional setup after loading the view.
         
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-        
+
     }
     
     //DELEGATE AND DATASOURCE METHODS
@@ -37,7 +37,7 @@ class ToDoViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         if let item = todoItems?[indexPath.row] {
             
@@ -73,25 +73,25 @@ class ToDoViewController: UITableViewController {
         
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
-        if let item = todoItems?[indexPath.row] {
-            do{
-                try realm.write {
-                    realm.delete(item)
-                }
-            }
-            catch{
-                print("Erro ao remover registro : \(error)")
-            }
-            
-            tableView.reloadData()
-        }
-        
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        
-    }
+    //    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    //
+    //        if let item = todoItems?[indexPath.row] {
+    //            do{
+    //                try realm.write {
+    //                    realm.delete(item)
+    //                }
+    //            }
+    //            catch{
+    //                print("Erro ao remover registro : \(error)")
+    //            }
+    //
+    //            tableView.reloadData()
+    //        }
+    //
+    //        tableView.deselectRow(at: indexPath, animated: true)
+    //
+    //
+    //    }
     
     
     //MARK: - ADD NEW ITEMS
@@ -148,6 +148,27 @@ class ToDoViewController: UITableViewController {
         
         tableView.reloadData()
     }
+    
+    //MARK: - DELETE model manipulation methods
+    
+    override func updateModel(at indexPath: IndexPath) {
+        
+        super.updateModel(at: indexPath)
+        
+        if let item = todoItems?[indexPath.row] {
+            do{
+                try realm.write {
+                    realm.delete(item)
+                }
+            }
+            catch{
+                print("Erro ao remover registro : \(error)")
+            }
+            
+        }
+        
+    }
+    
     
 }
 
