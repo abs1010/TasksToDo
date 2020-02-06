@@ -108,8 +108,8 @@
 		BCA21E4223B6C5140030AEFD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				BCA21E3023B6C4700030AEFD /* ToDoViewController.swift */,
 				BCA21E6C23BA854A0030AEFD /* CategoryViewController.swift */,
+				BCA21E3023B6C4700030AEFD /* ToDoViewController.swift */,
 				BC29B92423C231E60068EDDD /* SwipeTableViewController.swift */,
 			);
 			path = Controller;
@@ -408,7 +408,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.abstec.ToDo;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.abstec0.ToDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -427,7 +427,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.abstec.ToDo;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.abstec0.ToDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -11,7 +11,7 @@ import RealmSwift
 
 class ToDoViewController: SwipeTableViewController {
     
-    var todoItems : Results<Item>?
+    var todoItems : Results<Item>?      
     
     let realm = try! Realm()
     
